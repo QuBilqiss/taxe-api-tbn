@@ -9,6 +9,7 @@ import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.bean.TaxeTnbAnnuelle;
 import com.sir.taxeapiTNB.bean.Terrain;
 import com.sir.taxeapiTNB.service.TaxeTnbAnnuelleService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class TaxeTnbAnnuelleRest {
     public int creerTaxe(@RequestBody TaxeTnbAnnuelle taxeTnbAnnuelle, Terrain terrain, TauxTaxeTnb tauxTaxeTnb) {
         return taxeTnbAnnuelleService.creerTaxe(taxeTnbAnnuelle, terrain, tauxTaxeTnb);
     }
+
 
     public TaxeTnbAnnuelleService getTaxeTnbAnnuelleService() {
         return taxeTnbAnnuelleService;

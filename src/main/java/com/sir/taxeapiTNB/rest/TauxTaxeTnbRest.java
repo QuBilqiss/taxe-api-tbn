@@ -5,6 +5,7 @@
  */
 package com.sir.taxeapiTNB.rest;
 
+import com.sir.taxeapiTNB.bean.CategorieTnb;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.service.TauxTaxeTnbService;
 import java.util.List;
@@ -33,6 +34,11 @@ private TauxTaxeTnbService tauxTaxeTnbService;
     public int creerTaux(@RequestBody TauxTaxeTnb tauxTaxeTnb) {
         return tauxTaxeTnbService.creerTaux(tauxTaxeTnb);
     }
+@GetMapping("/categorieTnb/{categorieTnb }")
+    public TauxTaxeTnb findByCategorieTnb(@PathVariable CategorieTnb categorieTnb) {
+        return tauxTaxeTnbService.findByCategorieTnb(categorieTnb);
+    }
+    
 
     public TauxTaxeTnbService getTauxTaxeTnbService() {
         return tauxTaxeTnbService;

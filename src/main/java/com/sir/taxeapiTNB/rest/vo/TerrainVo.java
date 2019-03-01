@@ -20,7 +20,7 @@ public class TerrainVo {
     private String dernierAnneePaiement;
     private CategorieTnb categorieTnb;
     private String referenceRue;
-    private String referenceRedeveble;
+    private String referenceRedevable;
     private List<TaxeTnbAnnuelleVo> taxeTnbAnnuelleVos;
 
     public Long getId() {
@@ -79,12 +79,12 @@ public class TerrainVo {
         this.referenceRue = referenceRue;
     }
 
-    public String getReferenceRedeveble() {
-        return referenceRedeveble;
+    public String getReferenceRedevable() {
+        return referenceRedevable;
     }
 
-    public void setReferenceRedeveble(String referenceRedeveble) {
-        this.referenceRedeveble = referenceRedeveble;
+    public void setReferenceRedevable(String referenceRedeveble) {
+        this.referenceRedevable = referenceRedeveble;
     }
 
     public List<TaxeTnbAnnuelleVo> getTaxeTnbAnnuelleVos() {

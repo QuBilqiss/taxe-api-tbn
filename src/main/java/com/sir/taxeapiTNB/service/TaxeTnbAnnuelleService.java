@@ -8,15 +8,20 @@ package com.sir.taxeapiTNB.service;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.bean.TaxeTnbAnnuelle;
 import com.sir.taxeapiTNB.bean.Terrain;
+import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author SAMSUNG
  */
-public interface TaxeTnbAnnuelleService  {
-     public TaxeTnbAnnuelle findByReference(String reference);
+public interface TaxeTnbAnnuelleService {
+
+    public TaxeTnbAnnuelle findByReference(String reference);
+
     public List<TaxeTnbAnnuelle> findByTerrainReference(String reference);
-    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle,Terrain terrain,TauxTaxeTnb tauxTaxeTnb);
-    
+
+    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle, Terrain terrain, TauxTaxeTnb tauxTaxeTnb);
+
+
 }

@@ -5,6 +5,7 @@
  */
 package com.sir.taxeapiTNB.service;
 
+import com.sir.taxeapiTNB.bean.CategorieTnb;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface TauxTaxeTnbService {
 
     public List<TauxTaxeTnb> findByCategorieTnbReference(String reference);
     public int creerTaux(TauxTaxeTnb tauxTaxeTnb);
+    public TauxTaxeTnb findByCategorieTnb(CategorieTnb categorieTnb);
 
 }

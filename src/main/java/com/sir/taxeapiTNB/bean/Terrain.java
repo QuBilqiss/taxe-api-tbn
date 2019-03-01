@@ -30,11 +30,11 @@ public class Terrain implements Serializable {
     private String reference;
     private double surface;
     private double dernierMontantPayer;
-    private int dernierAnneePaiement;
+    private Long dernierAnneePaiement;
     @ManyToOne
     private CategorieTnb categorieTnb;
     private String referenceRue;
-    private String referenceRedeveble;
+    private String referenceRedevable;
     @OneToMany(mappedBy = "terrain")
     private List<TaxeTnbAnnuelle> taxeTnbAnnuelles;
 
@@ -72,13 +72,15 @@ public class Terrain implements Serializable {
         this.dernierMontantPayer = dernierMontantPayer;
     }
 
-    public int getDernierAnneePaiement() {
+    public Long getDernierAnneePaiement() {
         return dernierAnneePaiement;
     }
 
-    public void setDernierAnneePaiement(int dernierAnneePaiement) {
+    public void setDernierAnneePaiement(Long dernierAnneePaiement) {
         this.dernierAnneePaiement = dernierAnneePaiement;
     }
+
+ 
 
     public CategorieTnb getCategorieTnb() {
         return categorieTnb;
@@ -96,12 +98,12 @@ public class Terrain implements Serializable {
         this.referenceRue = referenceRue;
     }
 
-    public String getReferenceRedeveble() {
-        return referenceRedeveble;
+    public String getReferenceRedevable() {
+        return referenceRedevable;
     }
 
-    public void setReferenceRedeveble(String referenceRedeveble) {
-        this.referenceRedeveble = referenceRedeveble;
+    public void setReferenceRedevable(String referenceRedeveble) {
+        this.referenceRedevable = referenceRedeveble;
     }
 
     public Long getId() {
@@ -111,6 +113,7 @@ public class Terrain implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
 
     @Override
     public int hashCode() {

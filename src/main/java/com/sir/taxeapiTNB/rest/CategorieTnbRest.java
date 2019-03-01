@@ -8,6 +8,7 @@ package com.sir.taxeapiTNB.rest;
 import com.sir.taxeapiTNB.bean.CategorieTnb;
 import com.sir.taxeapiTNB.service.CategorieTnbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author SAMSUNG
  */
 @RestController()
+@CrossOrigin(origins={"http://localhost:8099"})
 @RequestMapping("/taxe-api-TNB/categories")
 public class CategorieTnbRest {
     @Autowired

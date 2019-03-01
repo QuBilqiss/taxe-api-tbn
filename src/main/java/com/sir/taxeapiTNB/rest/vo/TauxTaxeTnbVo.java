@@ -13,16 +13,23 @@ import javax.persistence.Temporal;
  * @author SAMSUNG
  */
 public class TauxTaxeTnbVo {
+
     private Long id;
+    private String reference;
     private String surfaceMin;
     private String surfaceMax;
-    private String monatantParMetreCarre;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private String montantParMetreCarre;
     private String dateDebut;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private String dateFin;
     private CategorieTnb categorieTnb;
 
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
     public Long getId() {
         return id;
     }
@@ -47,12 +54,12 @@ public class TauxTaxeTnbVo {
         this.surfaceMax = surfaceMax;
     }
 
-    public String getMonatantParMetreCarre() {
-        return monatantParMetreCarre;
+    public String getMontantParMetreCarre() {
+        return montantParMetreCarre;
     }
 
-    public void setMonatantParMetreCarre(String monatantParMetreCarre) {
-        this.monatantParMetreCarre = monatantParMetreCarre;
+    public void setMontantParMetreCarre(String montantParMetreCarre) {
+        this.montantParMetreCarre = montantParMetreCarre;
     }
 
     public String getDateDebut() {
@@ -78,7 +85,5 @@ public class TauxTaxeTnbVo {
     public void setCategorieTnb(CategorieTnb categorieTnb) {
         this.categorieTnb = categorieTnb;
     }
-    
 
- 
 }

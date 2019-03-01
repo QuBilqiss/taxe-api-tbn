@@ -8,7 +8,9 @@ package com.sir.taxeapiTNB.service.impl;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.bean.TaxeTnbAnnuelle;
 import com.sir.taxeapiTNB.bean.Terrain;
+import com.sir.taxeapiTNB.commun.util.DateUtil;
 import com.sir.taxeapiTNB.dao.TaxeTnbAnnuelleDao;
+import com.sir.taxeapiTNB.service.TauxTaxeTnbService;
 import com.sir.taxeapiTNB.service.TaxeTnbAnnuelleService;
 import com.sir.taxeapiTNB.service.TerrainService;
 import java.util.List;
@@ -26,6 +28,10 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
     private TaxeTnbAnnuelleDao taxeTnbAnnuelleDao;
     @Autowired
     private TerrainService terrainService;
+    @Autowired
+    private TaxeTnbAnnuelleService taxeTnbAnnuelleService;
+    @Autowired
+    private TauxTaxeTnbService tauxTaxeTnbService;
 
     @Override
     public TaxeTnbAnnuelle findByReference(String reference) {
@@ -36,30 +42,38 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
     public List<TaxeTnbAnnuelle> findByTerrainReference(String reference) {
         return taxeTnbAnnuelleDao.findByTerrainReference(reference);
     }
- @Override
-    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle,Terrain terrain,TauxTaxeTnb tauxTaxeTnb) {
-        int res = 0;
-        Terrain t = terrainService.findByReference(terrain.getReference());
+
+    @Override
+    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle, Terrain terrain, TauxTaxeTnb tauxTaxeTnb) {
         TaxeTnbAnnuelle taxe = findByReference(taxeTnbAnnuelle.getReference());
-        if (taxe
-                != null) {
-            return -1;
-        } else if (t
-                == null || terrain.getReference()
-                == null) {
-            return -2;
-        } else {
+        Terrain t = terrainService.findByReference(taxeTnbAnnuelle.getReference());
+        TauxTaxeTnb taux = tauxTaxeTnbService.findByCategorieTnb(terrain.getCategorieTnb());
+        int res = 0;
+        if (t == null) {
+           res=-1;
+        } 
+        else if (taxe!= null ) {
+            res= -2;
+        }
+        else if(taux==null){
+            return -3;
+        }
+        
+        else {
+            int nombreMoisRetard = (int) DateUtil.diff(taxeTnbAnnuelle.getDatePresentation(), (int) taxeTnbAnnuelle.getAnneePaiement());
+            System.out.println("le nombre de retard est" + nombreMoisRetard);
             double montant = 0;
-            double montantDeBase = terrain.getSurface() * tauxTaxeTnb.getMonatantParMetreCarre();
-            double montantMajoration = montantDeBase * (10 / 100);
-            double montantPenalite = montantDeBase * (5 / 100);
-            if (taxeTnbAnnuelle.getNombreMoisRetard() == 0) {
+            double montantDeBase = terrain.getSurface() * tauxTaxeTnb.getMontantParMetreCarre();
+            double montantMajoration = montantDeBase * tauxTaxeTnb.getMajoration();
+            double montantPenalite = montantDeBase * tauxTaxeTnb.getPenalite();
+            if (nombreMoisRetard == 0) {
                 montant += montantDeBase;
                 res = 1;
-            } else if (taxeTnbAnnuelle.getNombreMoisRetard() == 1) {
+            } else if (nombreMoisRetard == 1) {
                 montant += montantDeBase + montantMajoration;
                 res = 2;
-            } else if (taxeTnbAnnuelle.getNombreMoisRetard() > 1) {
+
+            } else if (nombreMoisRetard > 1) {
                 montant += montantDeBase + montantMajoration + montantPenalite;
                 res = 3;
             }
@@ -85,5 +99,21 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
         this.terrainService = terrainService;
     }
 
+    public TaxeTnbAnnuelleService getTaxeTnbAnnuelleService() {
+        return taxeTnbAnnuelleService;
+    }
+
+    public void setTaxeTnbAnnuelleService(TaxeTnbAnnuelleService taxeTnbAnnuelleService) {
+        this.taxeTnbAnnuelleService = taxeTnbAnnuelleService;
+    }
+
+    public TauxTaxeTnbService getTauxTaxeTnbService() {
+        return tauxTaxeTnbService;
+    }
+
+    public void setTauxTaxeTnbService(TauxTaxeTnbService tauxTaxeTnbService) {
+        this.tauxTaxeTnbService = tauxTaxeTnbService;
+    }
+    
 
 }

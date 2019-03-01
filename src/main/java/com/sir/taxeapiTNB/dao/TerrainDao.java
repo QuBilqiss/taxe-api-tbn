@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TerrainDao extends JpaRepository<Terrain, Long> {
-   public Terrain findByReference(String reference);
+
+   public Terrain findByReference(String reference );
    public List<Terrain> findByCategorieTnbReference(String reference);   
 }

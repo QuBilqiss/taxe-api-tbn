@@ -24,15 +24,45 @@ public class TauxTaxeTnb implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private double surfaceMin;
     private double surfaceMax;
-    private double monatantParMetreCarre;
+    private double majoration;
+    private double penalite;
+    private double montantParMetreCarre;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateDebut;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateFin;
     @ManyToOne
     private CategorieTnb categorieTnb;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    
+    
+    
+    public double getMajoration() {
+        return majoration;
+    }
+
+    public void setMajoration(double majoration) {
+        this.majoration = majoration;
+    }
+
+    public double getPenalite() {
+        return penalite;
+    }
+
+    public void setPenalite(double penalite) {
+        this.penalite = penalite;
+    }
 
     
     
@@ -68,13 +98,15 @@ public class TauxTaxeTnb implements Serializable {
         this.surfaceMax = surfaceMax;
     }
 
-    public double getMonatantParMetreCarre() {
-        return monatantParMetreCarre;
+    public double getMontantParMetreCarre() {
+        return montantParMetreCarre;
     }
 
-    public void setMonatantParMetreCarre(double monatantParMetreCarre) {
-        this.monatantParMetreCarre = monatantParMetreCarre;
+    public void setMontantParMetreCarre(double montantParMetreCarre) {
+        this.montantParMetreCarre = montantParMetreCarre;
     }
+
+   
 
     public CategorieTnb getCategorieTnb() {
         return categorieTnb;

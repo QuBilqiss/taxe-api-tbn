@@ -12,19 +12,19 @@ import com.sir.taxeapiTNB.rest.vo.CategorieTnbVo;
  *
  * @author SAMSUNG
  */
-public class CategorieTnbConverter implements AbstractConverter<CategorieTnb, CategorieTnbVo> {
+public class CategorieTnbConverter extends AbstractConverter<CategorieTnb, CategorieTnbVo> {
 
     @Override
     public CategorieTnb toItem(CategorieTnbVo vo) {
         if (vo == null) {
             return null;
-        }
-        else{
-            CategorieTnb item=new CategorieTnb();
+        } else {
+            CategorieTnb item = new CategorieTnb();
             item.setReference(vo.getReference());
             item.setLibelle(vo.getLibelle());
             item.setId(vo.getId());
-            //item.setTauxTaxeTnbs(new TauxTaxeTnbConverter().toItem(vo.getTauxTaxeTnbVos()));
+            item.setTauxTaxeTnbs(new TauxTaxeTnbConverter().toItem(vo.getTauxTaxeTnbVos()));
+            item.setTerrains(new TerrainConverter().toItem(vo.getTerrainVos()));
             return item;
         }
 
@@ -32,7 +32,20 @@ public class CategorieTnbConverter implements AbstractConverter<CategorieTnb, Ca
 
     @Override
     public CategorieTnbVo toVo(CategorieTnb item) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+ if (item == null) {
+            return null;
+        } else {
+            CategorieTnbVo vo = new CategorieTnbVo();
+            vo.setReference(item.getReference());
+            vo.setLibelle(item.getLibelle());
+            vo.setId(item.getId());
+            vo.setTauxTaxeTnbVos(new TauxTaxeTnbConverter().toVo(item.getTauxTaxeTnbs()));
+            vo.setTerrainVos(new TerrainConverter().toVo(item.getTerrains()));
+            return vo;
+        }
+        
     }
+
+    
 
 }

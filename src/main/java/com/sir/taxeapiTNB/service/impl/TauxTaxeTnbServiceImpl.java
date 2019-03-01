@@ -5,6 +5,7 @@
  */
 package com.sir.taxeapiTNB.service.impl;
 
+import com.sir.taxeapiTNB.bean.CategorieTnb;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.dao.TauxTaxeTnbDao;
 import com.sir.taxeapiTNB.service.TauxTaxeTnbService;
@@ -32,6 +33,11 @@ public class TauxTaxeTnbServiceImpl implements TauxTaxeTnbService {
         tauxTaxeTnbDao.save(tauxTaxeTnb);
         return 1;
     }
+        @Override
+    public TauxTaxeTnb findByCategorieTnb(CategorieTnb categorieTnb) {
+        return tauxTaxeTnbDao.findByCategorieTnb(categorieTnb);
+    }
+    
 
     public TauxTaxeTnbDao getTauxTaxeTnbDao() {
         return tauxTaxeTnbDao;
@@ -40,6 +46,9 @@ public class TauxTaxeTnbServiceImpl implements TauxTaxeTnbService {
     public void setTauxTaxeTnbDao(TauxTaxeTnbDao tauxTaxeTnbDao) {
         this.tauxTaxeTnbDao = tauxTaxeTnbDao;
     }
+
+    
+
     
 
 }

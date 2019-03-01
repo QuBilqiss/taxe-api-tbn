@@ -33,9 +33,10 @@ public class TaxeTnbAnnuelle implements Serializable {
     private int nombreMoisRetard;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date datePresentation;
+    private Long anneePaiement;
     private String referenceRedevable;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date datePaiement;
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date datePaiement;
     @ManyToOne
     private Terrain terrain;
 
@@ -103,13 +104,13 @@ public class TaxeTnbAnnuelle implements Serializable {
         this.reference = reference;
     }
 
-    public Date getDatePaiement() {
-        return datePaiement;
-    }
-
-    public void setDatePaiement(Date datePaiement) {
-        this.datePaiement = datePaiement;
-    }
+//    public Date getDatePaiement() {
+//        return datePaiement;
+//    }
+//
+//    public void setDatePaiement(Date datePaiement) {
+//        this.datePaiement = datePaiement;
+//    }
 
     public Terrain getTerrain() {
         return terrain;
@@ -126,6 +127,16 @@ public class TaxeTnbAnnuelle implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public long getAnneePaiement() {
+        return anneePaiement;
+    }
+
+    public void setAnneePaiement(long anneePaiement) {
+        this.anneePaiement = anneePaiement;
+    }
+
+    
 
     @Override
     public int hashCode() {

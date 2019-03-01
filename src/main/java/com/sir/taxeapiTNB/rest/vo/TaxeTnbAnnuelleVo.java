@@ -6,7 +6,6 @@
 package com.sir.taxeapiTNB.rest.vo;
 
 import com.sir.taxeapiTNB.bean.Terrain;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -20,11 +19,9 @@ public class TaxeTnbAnnuelleVo {
     private String montantPenalite;
     private String montantTaxe;
     private String nombreMoisRetard;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private String datePresentation;
     private String referenceRedevable;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private String datePaiement;
+    private String anneePaiement;
     private Terrain terrain;
 
     public Long getId() {
@@ -82,15 +79,6 @@ public class TaxeTnbAnnuelleVo {
     public void setNombreMoisRetard(String nombreMoisRetard) {
         this.nombreMoisRetard = nombreMoisRetard;
     }
-
-    public String getDatePresentation() {
-        return datePresentation;
-    }
-
-    public void setDatePresentation(String datePresentation) {
-        this.datePresentation = datePresentation;
-    }
-
     public String getReferenceRedevable() {
         return referenceRedevable;
     }
@@ -99,13 +87,15 @@ public class TaxeTnbAnnuelleVo {
         this.referenceRedevable = referenceRedevable;
     }
 
-    public String getDatePaiement() {
-        return datePaiement;
+    public String getAnneePaiement() {
+        return anneePaiement;
     }
 
-    public void setDatePaiement(String datePaiement) {
-        this.datePaiement = datePaiement;
+    public void setAnneePaiement(String anneePaiement) {
+        this.anneePaiement = anneePaiement;
     }
+
+   
 
     public Terrain getTerrain() {
         return terrain;
@@ -113,6 +103,14 @@ public class TaxeTnbAnnuelleVo {
 
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
+    }
+
+    public String getDatePresentation() {
+        return datePresentation;
+    }
+
+    public void setDatePresentation(String datePresentation) {
+        this.datePresentation = datePresentation;
     }
     
  
