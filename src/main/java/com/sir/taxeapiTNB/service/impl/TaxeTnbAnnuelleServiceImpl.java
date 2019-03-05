@@ -34,8 +34,8 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
     private TauxTaxeTnbService tauxTaxeTnbService;
 
     @Override
-    public TaxeTnbAnnuelle findByReference(String reference) {
-        return taxeTnbAnnuelleDao.findByReference(reference);
+    public TaxeTnbAnnuelle findByTerrainReferenceAndAnneePaiement(String reference, Long anneePaiement) {
+        return taxeTnbAnnuelleDao.findByTerrainReferenceAndAnneePaiement(reference, anneePaiement);
     }
 
     @Override
@@ -44,43 +44,51 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
     }
 
     @Override
-    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle, Terrain terrain, TauxTaxeTnb tauxTaxeTnb) {
-        TaxeTnbAnnuelle taxe = findByReference(taxeTnbAnnuelle.getReference());
-        Terrain t = terrainService.findByReference(taxeTnbAnnuelle.getReference());
-        TauxTaxeTnb taux = tauxTaxeTnbService.findByCategorieTnb(terrain.getCategorieTnb());
+    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle) {
+        //findByLocalReferenceAndAnne
+        String terrainReference = taxeTnbAnnuelle.getTerrain().getReference();
+        TaxeTnbAnnuelle taxe = findByTerrainReferenceAndAnneePaiement(terrainReference, taxeTnbAnnuelle.getAnneePaiement());
+        // findByReference
+        System.out.println("terrain.getReference() == " + terrainReference);
+        Terrain terrain = terrainService.findByReference(terrainReference);
+        //tauxDao findByCategorieReference
+        //hada l'erreur da3 before flushing
+        taxeTnbAnnuelle.setTerrain(terrain);
+        TauxTaxeTnb tauxTaxeTnb = tauxTaxeTnbService.findByCategorieTnbReference(terrain.getCategorieTnb().getReference());
+        System.out.println("tauxTaxeTnb = " + tauxTaxeTnb);
         int res = 0;
-        if (t == null) {
-           res=-1;
-        } 
-        else if (taxe!= null ) {
-            res= -2;
-        }
-        else if(taux==null){
-            return -3;
-        }
-        
-        else {
+        if (terrain == null) {
+            return -11;
+        } else if (taxe != null) {
+            return -22;
+        } else if (tauxTaxeTnb == null) {
+            return -33;
+        } else {
             int nombreMoisRetard = (int) DateUtil.diff(taxeTnbAnnuelle.getDatePresentation(), (int) taxeTnbAnnuelle.getAnneePaiement());
             System.out.println("le nombre de retard est" + nombreMoisRetard);
             double montant = 0;
             double montantDeBase = terrain.getSurface() * tauxTaxeTnb.getMontantParMetreCarre();
             double montantMajoration = montantDeBase * tauxTaxeTnb.getMajoration();
             double montantPenalite = montantDeBase * tauxTaxeTnb.getPenalite();
+            System.out.println("montantPenalite = " + montantPenalite);
+            System.out.println("montantMajoration = " + montantMajoration);
+            System.out.println("montantDeBase = " + montantDeBase);
+
             if (nombreMoisRetard == 0) {
                 montant += montantDeBase;
                 res = 1;
             } else if (nombreMoisRetard == 1) {
                 montant += montantDeBase + montantMajoration;
                 res = 2;
-
             } else if (nombreMoisRetard > 1) {
                 montant += montantDeBase + montantMajoration + montantPenalite;
                 res = 3;
             }
             taxeTnbAnnuelle.setMontantTaxe(montant);
+            
             taxeTnbAnnuelleDao.save(taxeTnbAnnuelle);
+            return nombreMoisRetard;
         }
-        return res;
     }
 
     public TaxeTnbAnnuelleDao getTaxeTnbAnnuelleDao() {
@@ -114,6 +122,5 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
     public void setTauxTaxeTnbService(TauxTaxeTnbService tauxTaxeTnbService) {
         this.tauxTaxeTnbService = tauxTaxeTnbService;
     }
-    
 
 }

@@ -146,7 +146,8 @@ public class TauxTaxeTnb implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sir.taxeTNBapiv1.bean.TauxTaxTnb[ id=" + id + " ]";
+        return "TauxTaxeTnb{" + "id=" + id + ", reference=" + reference + ", surfaceMin=" + surfaceMin + ", surfaceMax=" + surfaceMax + ", majoration=" + majoration + ", penalite=" + penalite + ", montantParMetreCarre=" + montantParMetreCarre + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", categorieTnb=" + categorieTnb.getLibelle() + '}';
     }
 
+  
 }

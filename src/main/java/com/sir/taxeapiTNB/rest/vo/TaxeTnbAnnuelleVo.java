@@ -5,7 +5,6 @@
  */
 package com.sir.taxeapiTNB.rest.vo;
 
-import com.sir.taxeapiTNB.bean.Terrain;
 
 /**
  *
@@ -22,7 +21,7 @@ public class TaxeTnbAnnuelleVo {
     private String datePresentation;
     private String referenceRedevable;
     private String anneePaiement;
-    private Terrain terrain;
+    private TerrainVo terrainVo;
 
     public Long getId() {
         return id;
@@ -95,15 +94,17 @@ public class TaxeTnbAnnuelleVo {
         this.anneePaiement = anneePaiement;
     }
 
+    public TerrainVo getTerrainVo() {
+        return terrainVo;
+    }
+
+    public void setTerrainVo(TerrainVo terrainVo) {
+        this.terrainVo = terrainVo;
+    }
+
    
 
-    public Terrain getTerrain() {
-        return terrain;
-    }
 
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
-    }
 
     public String getDatePresentation() {
         return datePresentation;

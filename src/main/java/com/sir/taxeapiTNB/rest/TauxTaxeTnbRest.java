@@ -7,7 +7,12 @@ package com.sir.taxeapiTNB.rest;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
+import com.sir.taxeapiTNB.rest.converter.CategorieTnbConverter;
+import com.sir.taxeapiTNB.rest.converter.TauxTaxeTnbConverter;
+import com.sir.taxeapiTNB.rest.vo.CategorieTnbVo;
+import com.sir.taxeapiTNB.rest.vo.TauxTaxeTnbVo;
 import com.sir.taxeapiTNB.service.TauxTaxeTnbService;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,19 +30,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/taxe-api-TNB/tauxTaxeTnbs")
 public class TauxTaxeTnbRest {
     @Autowired
-private TauxTaxeTnbService tauxTaxeTnbService; 
-@GetMapping("/reference/{reference}")
-    public List<TauxTaxeTnb> findByCategorieTnbReference(@PathVariable String reference) {
-        return tauxTaxeTnbService.findByCategorieTnbReference(reference);
+private TauxTaxeTnbService tauxTaxeTnbService;
+
+
+    
+
+    @GetMapping("/reference/{reference}")
+    public TauxTaxeTnbVo findByCategorieTnbReference(@PathVariable String reference) {
+        return new TauxTaxeTnbConverter().toVo(tauxTaxeTnbService.findByCategorieTnbReference(reference));
     }
 @PostMapping("/")
-    public int creerTaux(@RequestBody TauxTaxeTnb tauxTaxeTnb) {
+    public int creerTaux(@RequestBody TauxTaxeTnbVo tauxTaxeTnbVo) {
+        TauxTaxeTnbConverter tauxTaxeTnbConverter=new TauxTaxeTnbConverter();
+        TauxTaxeTnb tauxTaxeTnb= tauxTaxeTnbConverter.toItem(tauxTaxeTnbVo);
         return tauxTaxeTnbService.creerTaux(tauxTaxeTnb);
     }
 @GetMapping("/categorieTnb/{categorieTnb }")
-    public TauxTaxeTnb findByCategorieTnb(@PathVariable CategorieTnb categorieTnb) {
-        return tauxTaxeTnbService.findByCategorieTnb(categorieTnb);
-    }
+    public List<TauxTaxeTnbVo> findByCategorieTnb(@PathVariable CategorieTnbVo categorieTnbVo) {
+        CategorieTnbConverter categorieTnbConverter=new CategorieTnbConverter();
+        CategorieTnb categorieTnb= categorieTnbConverter.toItem(categorieTnbVo);
+        return new TauxTaxeTnbConverter().toVo(tauxTaxeTnbService.findByCategorieTnb(categorieTnb));
+    }   
     
 
     public TauxTaxeTnbService getTauxTaxeTnbService() {

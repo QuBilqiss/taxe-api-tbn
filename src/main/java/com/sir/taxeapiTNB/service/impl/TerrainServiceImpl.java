@@ -37,7 +37,6 @@ public class TerrainServiceImpl implements TerrainService {
         terrainDao.save(terrain);
         return 1;
     }
-
     public TerrainDao getTerrainDao() {
         return terrainDao;
     }
@@ -45,6 +44,8 @@ public class TerrainServiceImpl implements TerrainService {
     public void setTerrainDao(TerrainDao terrainDao) {
         this.terrainDao = terrainDao;
     }
+
+  
     
     
     

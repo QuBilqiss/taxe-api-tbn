@@ -7,6 +7,7 @@ package com.sir.taxeapiTNB.rest.converter;
 
 import com.sir.taxeapiTNB.bean.TaxeTnbAnnuelle;
 import com.sir.taxeapiTNB.commun.util.DateUtil;
+import static com.sir.taxeapiTNB.commun.util.DateUtil.paternYYYY_MM_DD;
 import com.sir.taxeapiTNB.commun.util.NumberUtil;
 import com.sir.taxeapiTNB.rest.vo.TaxeTnbAnnuelleVo;
 
@@ -26,13 +27,14 @@ public class TaxeTnbAnnuelleConverter extends AbstractConverter<TaxeTnbAnnuelle,
            item.setId(vo.getId());
            item.setReference(vo.getReference());
            item.setAnneePaiement(NumberUtil.toLong(vo.getAnneePaiement()));
-           item.setDatePresentation(DateUtil.parseYYYYMMDDmmhhSS(vo.getDatePresentation()));
+           item.setDatePresentation(DateUtil.parse(vo.getDatePresentation(),paternYYYY_MM_DD));
            item.setMontantDeBase(NumberUtil.toDouble(vo.getMontantDeBase()));
            item.setMontantMajoration(NumberUtil.toDouble(vo.getMontantMajoration()));
            item.setMontantPenalite(NumberUtil.toDouble(vo.getMontantPenalite()));
            item.setMontantTaxe(NumberUtil.toDouble(vo.getMontantTaxe()));
            item.setNombreMoisRetard(NumberUtil.toInteger(vo.getNombreMoisRetard()));
            item.setReferenceRedevable(vo.getReferenceRedevable());
+           item.setTerrain(new TerrainConverter().toItem(vo.getTerrainVo()));
            return item;
        }
     }

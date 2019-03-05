@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TaxeTnbAnnuelleDao extends JpaRepository<TaxeTnbAnnuelle,Long>{
-    public TaxeTnbAnnuelle findByReference(String reference);
+    public TaxeTnbAnnuelle findByTerrainReferenceAndAnneePaiement(String reference,Long anneePaiement);
     public List<TaxeTnbAnnuelle> findByTerrainReference(String reference);
+
 }

@@ -6,6 +6,7 @@
 package com.sir.taxeapiTNB.service;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
+import java.util.List;
 
 /**
  *

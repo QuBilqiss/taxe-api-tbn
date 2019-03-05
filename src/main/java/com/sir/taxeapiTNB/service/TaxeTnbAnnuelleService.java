@@ -8,7 +8,6 @@ package com.sir.taxeapiTNB.service;
 import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
 import com.sir.taxeapiTNB.bean.TaxeTnbAnnuelle;
 import com.sir.taxeapiTNB.bean.Terrain;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,11 +16,10 @@ import java.util.List;
  */
 public interface TaxeTnbAnnuelleService {
 
-    public TaxeTnbAnnuelle findByReference(String reference);
-
+    public TaxeTnbAnnuelle findByTerrainReferenceAndAnneePaiement(String reference,Long anneePaiement);
     public List<TaxeTnbAnnuelle> findByTerrainReference(String reference);
+    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle);
 
-    public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle, Terrain terrain, TauxTaxeTnb tauxTaxeTnb);
 
-
+   
 }

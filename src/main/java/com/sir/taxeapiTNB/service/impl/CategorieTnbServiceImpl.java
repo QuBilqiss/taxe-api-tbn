@@ -6,13 +6,10 @@
 package com.sir.taxeapiTNB.service.impl;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
-import com.sir.taxeapiTNB.bean.TauxTaxeTnb;
-import com.sir.taxeapiTNB.bean.Terrain;
 import com.sir.taxeapiTNB.dao.CategorieTnbDao;
 import com.sir.taxeapiTNB.service.CategorieTnbService;
 import com.sir.taxeapiTNB.service.TauxTaxeTnbService;
 import com.sir.taxeapiTNB.service.TerrainService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +56,8 @@ public class CategorieTnbServiceImpl implements CategorieTnbService {
         }
     }
 
+    
+
     public CategorieTnbDao getCategorieTnbDao() {
         return categorieTnbDao;
     }
@@ -82,6 +81,7 @@ public class CategorieTnbServiceImpl implements CategorieTnbService {
     public void setTauxTaxeTnbService(TauxTaxeTnbService tauxTaxeTnbService) {
         this.tauxTaxeTnbService = tauxTaxeTnbService;
     }
-    
+
+  
 
 }

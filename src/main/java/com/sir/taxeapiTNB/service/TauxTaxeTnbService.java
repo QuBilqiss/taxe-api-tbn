@@ -15,8 +15,9 @@ import java.util.List;
  */
 public interface TauxTaxeTnbService {
 
-    public List<TauxTaxeTnb> findByCategorieTnbReference(String reference);
+    public TauxTaxeTnb findByCategorieTnbReference(String reference);
+    public List<TauxTaxeTnb> findByCategorieTnb(CategorieTnb categorieTnb);
     public int creerTaux(TauxTaxeTnb tauxTaxeTnb);
-    public TauxTaxeTnb findByCategorieTnb(CategorieTnb categorieTnb);
+
 
 }

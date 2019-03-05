@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TauxTaxeTnbDao extends JpaRepository<TauxTaxeTnb, Long> {
-    public List<TauxTaxeTnb> findByCategorieTnbReference(String reference);
-    public TauxTaxeTnb findByCategorieTnb(CategorieTnb categorieTnb);
+    public TauxTaxeTnb findByCategorieTnbReference(String reference);
+    public List<TauxTaxeTnb> findByCategorieTnb(CategorieTnb categorieTnb);
+    
 }

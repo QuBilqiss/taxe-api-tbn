@@ -24,7 +24,7 @@ public class TauxTaxeTnbServiceImpl implements TauxTaxeTnbService {
     private TauxTaxeTnbDao tauxTaxeTnbDao;
 
     @Override
-    public List<TauxTaxeTnb> findByCategorieTnbReference(String reference) {
+    public TauxTaxeTnb findByCategorieTnbReference(String reference) {
         return tauxTaxeTnbDao.findByCategorieTnbReference(reference);
     }
 
@@ -34,10 +34,11 @@ public class TauxTaxeTnbServiceImpl implements TauxTaxeTnbService {
         return 1;
     }
         @Override
-    public TauxTaxeTnb findByCategorieTnb(CategorieTnb categorieTnb) {
+    public List<TauxTaxeTnb> findByCategorieTnb(CategorieTnb categorieTnb) {
         return tauxTaxeTnbDao.findByCategorieTnb(categorieTnb);
     }
     
+   
 
     public TauxTaxeTnbDao getTauxTaxeTnbDao() {
         return tauxTaxeTnbDao;
@@ -46,6 +47,7 @@ public class TauxTaxeTnbServiceImpl implements TauxTaxeTnbService {
     public void setTauxTaxeTnbDao(TauxTaxeTnbDao tauxTaxeTnbDao) {
         this.tauxTaxeTnbDao = tauxTaxeTnbDao;
     }
+
 
     
 

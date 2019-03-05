@@ -6,7 +6,10 @@
 package com.sir.taxeapiTNB.rest;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
+import com.sir.taxeapiTNB.rest.converter.CategorieTnbConverter;
+import com.sir.taxeapiTNB.rest.vo.CategorieTnbVo;
 import com.sir.taxeapiTNB.service.CategorieTnbService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +30,14 @@ public class CategorieTnbRest {
     @Autowired
   private CategorieTnbService categorieTnbService;
 @GetMapping("reference/{reference}")
-    public CategorieTnb findByReference(@PathVariable String reference) {
-        return categorieTnbService.findByReference(reference);
+    public CategorieTnbVo findByReference(@PathVariable String reference) {
+        return new CategorieTnbConverter().toVo( categorieTnbService.findByReference(reference));
     }
 @PostMapping("/")
-    public int creerCategorie( @RequestBody CategorieTnb categorieTnb) {
-        return categorieTnbService.creerCategorie(categorieTnb);
+    public int creerCategorie( @RequestBody CategorieTnbVo categorieTnbVo) {
+        CategorieTnbConverter ctConverter= new CategorieTnbConverter();
+        CategorieTnb categorieTnb= ctConverter.toItem(categorieTnbVo);
+       return  categorieTnbService.creerCategorie(categorieTnb);
     }
 
     public CategorieTnbService getCategorieTnbService() {

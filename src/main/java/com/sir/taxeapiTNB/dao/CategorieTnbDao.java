@@ -6,6 +6,7 @@
 package com.sir.taxeapiTNB.dao;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CategorieTnbDao extends JpaRepository<CategorieTnb, Long> {
+
     public CategorieTnb findByReference(String reference);
-    
+
 }
