@@ -45,14 +45,11 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
 
     @Override
     public int creerTaxe(TaxeTnbAnnuelle taxeTnbAnnuelle) {
-        //findByLocalReferenceAndAnne
         String terrainReference = taxeTnbAnnuelle.getTerrain().getReference();
         TaxeTnbAnnuelle taxe = findByTerrainReferenceAndAnneePaiement(terrainReference, taxeTnbAnnuelle.getAnneePaiement());
-        // findByReference
         System.out.println("terrain.getReference() == " + terrainReference);
         Terrain terrain = terrainService.findByReference(terrainReference);
-        //tauxDao findByCategorieReference
-        //hada l'erreur da3 before flushing
+        //hada l'erreur ta3 before flushing
         taxeTnbAnnuelle.setTerrain(terrain);
         TauxTaxeTnb tauxTaxeTnb = tauxTaxeTnbService.findByCategorieTnbReference(terrain.getCategorieTnb().getReference());
         System.out.println("tauxTaxeTnb = " + tauxTaxeTnb);
@@ -67,25 +64,29 @@ public class TaxeTnbAnnuelleServiceImpl implements TaxeTnbAnnuelleService {
             int nombreMoisRetard = (int) DateUtil.diff(taxeTnbAnnuelle.getDatePresentation(), (int) taxeTnbAnnuelle.getAnneePaiement());
             System.out.println("le nombre de retard est" + nombreMoisRetard);
             double montant = 0;
-            double montantDeBase = terrain.getSurface() * tauxTaxeTnb.getMontantParMetreCarre();
-            double montantMajoration = montantDeBase * tauxTaxeTnb.getMajoration();
-            double montantPenalite = montantDeBase * tauxTaxeTnb.getPenalite();
-            System.out.println("montantPenalite = " + montantPenalite);
-            System.out.println("montantMajoration = " + montantMajoration);
-            System.out.println("montantDeBase = " + montantDeBase);
+            double nvMontantDeBase = terrain.getSurface() * tauxTaxeTnb.getMontantParMetreCarre();
+            double nvMontantMajoration = nvMontantDeBase * tauxTaxeTnb.getMajoration();
+            double nvMontantPenalite = nvMontantDeBase * tauxTaxeTnb.getPenalite();
+            System.out.println("montantPenalite = " + nvMontantPenalite);
+            System.out.println("montantMajoration = " + nvMontantMajoration);
+            System.out.println("montantDeBase = " + nvMontantDeBase);
 
             if (nombreMoisRetard == 0) {
-                montant += montantDeBase;
+                montant += nvMontantDeBase;
                 res = 1;
             } else if (nombreMoisRetard == 1) {
-                montant += montantDeBase + montantMajoration;
+                montant += nvMontantDeBase + nvMontantMajoration;
+                taxeTnbAnnuelle.setMontantMajoration(nvMontantMajoration);
                 res = 2;
             } else if (nombreMoisRetard > 1) {
-                montant += montantDeBase + montantMajoration + montantPenalite;
+                montant += nvMontantDeBase + nvMontantMajoration + nvMontantPenalite*nombreMoisRetard;
+                taxeTnbAnnuelle.setMontantMajoration(nvMontantMajoration);
+                taxeTnbAnnuelle.setMontantPenalite(nvMontantPenalite);
                 res = 3;
             }
             taxeTnbAnnuelle.setMontantTaxe(montant);
-            
+            taxeTnbAnnuelle.setNombreMoisRetard(nombreMoisRetard);
+            taxeTnbAnnuelle.setMontantDeBase(nvMontantDeBase);
             taxeTnbAnnuelleDao.save(taxeTnbAnnuelle);
             return nombreMoisRetard;
         }

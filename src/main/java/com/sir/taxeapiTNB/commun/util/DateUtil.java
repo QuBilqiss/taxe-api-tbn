@@ -120,8 +120,8 @@ public class DateUtil {
         return m;
     }
 
-    public static void main(String[] args) {
-      //  diff(new Date(), 2018);
-        System.out.println(parse("2015-02-12", paternYYYY_MM_DD));
-    }
+//    public static void main(String[] args) {
+//      //  diff(new Date(), 2018);
+//        System.out.println(parse("2015-02-12", paternYYYY_MM_DD));
+//    }
 }
