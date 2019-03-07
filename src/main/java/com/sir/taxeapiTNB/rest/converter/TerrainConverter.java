@@ -29,6 +29,7 @@ public class TerrainConverter extends AbstractConverter<Terrain, TerrainVo> {
             item.setDernierAnneePaiement(NumberUtil.toLong(vo.getDernierAnneePaiement()));
             item.setReferenceRedevable(vo.getReferenceRedevable());
             item.setReferenceRue(vo.getReferenceRue());
+            item.setCategorieTnb(vo.getCategorieTnb());
             return item;
         }
     }

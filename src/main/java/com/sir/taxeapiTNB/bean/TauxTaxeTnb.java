@@ -24,7 +24,6 @@ public class TauxTaxeTnb implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String reference;
     private double surfaceMin;
     private double surfaceMax;
     private double majoration;
@@ -37,13 +36,7 @@ public class TauxTaxeTnb implements Serializable {
     @ManyToOne
     private CategorieTnb categorieTnb;
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+ 
 
     
     
@@ -146,7 +139,7 @@ public class TauxTaxeTnb implements Serializable {
 
     @Override
     public String toString() {
-        return "TauxTaxeTnb{" + "id=" + id + ", reference=" + reference + ", surfaceMin=" + surfaceMin + ", surfaceMax=" + surfaceMax + ", majoration=" + majoration + ", penalite=" + penalite + ", montantParMetreCarre=" + montantParMetreCarre + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", categorieTnb=" + categorieTnb.getLibelle() + '}';
+        return "TauxTaxeTnb{" + "id=" + id +  ", surfaceMin=" + surfaceMin + ", surfaceMax=" + surfaceMax + ", majoration=" + majoration + ", penalite=" + penalite + ", montantParMetreCarre=" + montantParMetreCarre + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", categorieTnb=" + categorieTnb.getLibelle() + '}';
     }
 
   

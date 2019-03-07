@@ -23,8 +23,8 @@ public class CategorieTnbConverter extends AbstractConverter<CategorieTnb, Categ
             item.setReference(vo.getReference());
             item.setLibelle(vo.getLibelle());
             item.setId(vo.getId());
-            item.setTauxTaxeTnbs(new TauxTaxeTnbConverter().toItem(vo.getTauxTaxeTnbVos()));
-            item.setTerrains(new TerrainConverter().toItem(vo.getTerrainVos()));
+            //item.setTauxTaxeTnbs(new TauxTaxeTnbConverter().toItem(vo.getTauxTaxeTnbVos()));
+            //item.setTerrains(new TerrainConverter().toItem(vo.getTerrainVos()));
             return item;
         }
 

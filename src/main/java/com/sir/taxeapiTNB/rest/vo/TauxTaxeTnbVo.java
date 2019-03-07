@@ -6,7 +6,6 @@
 package com.sir.taxeapiTNB.rest.vo;
 
 import com.sir.taxeapiTNB.bean.CategorieTnb;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -15,21 +14,16 @@ import javax.persistence.Temporal;
 public class TauxTaxeTnbVo {
 
     private Long id;
-    private String reference;
     private String surfaceMin;
     private String surfaceMax;
+    private String majoration;
+    private String penalite;
     private String montantParMetreCarre;
     private String dateDebut;
     private String dateFin;
     private CategorieTnb categorieTnb;
 
-    public String getReference() {
-        return reference;
-    }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
     public Long getId() {
         return id;
     }
@@ -81,6 +75,23 @@ public class TauxTaxeTnbVo {
     public CategorieTnb getCategorieTnb() {
         return categorieTnb;
     }
+
+    public String getMajoration() {
+        return majoration;
+    }
+
+    public void setMajoration(String majoration) {
+        this.majoration = majoration;
+    }
+
+    public String getPenalite() {
+        return penalite;
+    }
+
+    public void setPenalite(String penalite) {
+        this.penalite = penalite;
+    }
+    
 
     public void setCategorieTnb(CategorieTnb categorieTnb) {
         this.categorieTnb = categorieTnb;
